@@ -1,0 +1,29 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "8f1806262a189d754ccff2cc1e1c3c58"
+name = "client-book-remix"
+handle = "client-book-remix"
+application_url = "https://carol-rfc-compilation-somehow.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "sziro.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = ""
+
+[auth]
+redirect_urls = [
+  "https://carol-rfc-compilation-somehow.trycloudflare.com/auth/callback",
+  "https://carol-rfc-compilation-somehow.trycloudflare.com/auth/shopify/callback",
+  "https://carol-rfc-compilation-somehow.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-07"
+
+[pos]
+embedded = false
