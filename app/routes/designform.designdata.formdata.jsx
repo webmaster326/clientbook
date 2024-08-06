@@ -23,24 +23,7 @@ export async function loader({ request }) {
       });
     }
 
-    try {
-      
-     
-      // Fetch all records from the settings table
-      const allSettings = await db.userTokens.findMany();
-  
-      return json({
-        ok: true,
-        message: "Success",
-        data: allSettings
-      });
-    } catch (error) {
-      console.error(error);
-      return json({
-        message: "Error fetching settings",
-        error: error.message
-      }, { status: 500 });
-    }
+   
 
     // If first_name, last_name, email_address is provided, return wishlist items for that customer.
     /*const wishlist = await db.wishlist.findMany({
@@ -101,25 +84,7 @@ export async function action({ request }) {
 
     switch (_action) {
       case "CREATE":
-        try {
-
         
-       
-          // Fetch all records from the settings table
-          const allSettings = await db.userTokens.findMany();
-      
-          return json({
-            ok: true,
-            message: "Success",
-            data: allSettings
-          });
-        } catch (error) {
-          console.error(error);
-          return json({
-            message: "Error fetching settings",
-            error: error.message
-          }, { status: 500 });
-        }
         // Check if the email already exists in the userTokens table
         let userToken;
         try {
