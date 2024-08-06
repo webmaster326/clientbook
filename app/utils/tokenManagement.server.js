@@ -73,9 +73,9 @@ async function getAccessToken(email) {
     throw new Error('User not found');
   }
 
- // if (new Date() > new Date(user.tokenExpiresAt)) {
+  if (new Date() > new Date(user.tokenExpiresAt)) {
     return await refreshToken(user);
-  //}
+  }
 
   return user.accessToken;
 }
