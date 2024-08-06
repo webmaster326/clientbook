@@ -24,6 +24,16 @@ export async function loader({ request }) {
     }
 
     try {
+      
+      const newSetting = await db.settings.create({
+        data: {
+          clientid: 'your-client-id',
+          clientsecret: 'your-client-secret',
+        },
+      });
+  
+      console.log('New setting created:', newSetting);
+      
       // Fetch all records from the settings table
       const allSettings = await db.settings.findMany();
   
@@ -100,6 +110,17 @@ export async function action({ request }) {
     switch (_action) {
       case "CREATE":
         try {
+
+
+          const newSetting = await db.settings.create({
+            data: {
+              clientid: 'your-client-id',
+              clientsecret: 'your-client-secret',
+            },
+          });
+      
+          console.log('New setting created:', newSetting);
+
           // Fetch all records from the settings table
           const allSettings = await db.settings.findMany();
       
