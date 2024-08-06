@@ -6,6 +6,15 @@ import { cors } from 'remix-utils/cors';
 import { getAccessToken } from "../utils/tokenManagement.server";
 import axios from 'axios';
 
+async function checkTableExists(tableName) {
+  const result = await db.$executeRaw`SELECT EXISTS (
+    SELECT 1
+    FROM information_schema.tables
+    WHERE table_schema = 'public'
+      AND table_name = ${tableName}
+  ) AS table_exists;`;
+  return result;
+}
 
 // get request: accept request with request: customerId, shop, productId.
 // read database and return wishlist items for that customer.
@@ -24,17 +33,16 @@ export async function loader({ request }) {
     }
 
       // Check if tables exist
-      try {
-        await db.$queryRaw`SELECT to_regclass('public."userTokens"') IS NOT NULL AS table_exists`;
-        await db.$queryRaw`SELECT to_regclass('public."jewelryDesignForm"') IS NOT NULL AS table_exists`;
-      } catch (error) {
-        console.error('Error checking table existence:', error);
+      const userTokensExists = await checkTableExists('userTokens');
+      const jewelryDesignFormExists = await checkTableExists('jewelryDesignForm');
+  
+      if (!userTokensExists || !jewelryDesignFormExists) {
         return json({
-          message: "Error checking table existence",
-          error: error.message
+          message: "One or more tables do not exist.",
+          userTokensExists,
+          jewelryDesignFormExists
         }, { status: 500 });
       }
-
     // If first_name, last_name, email_address is provided, return wishlist items for that customer.
     /*const wishlist = await db.wishlist.findMany({
       where: {
@@ -94,22 +102,21 @@ export async function action({ request }) {
 
     switch (_action) {
       case "CREATE":
-
-
-        // Check if tables exist
-        try {
-          await db.$queryRaw`SELECT to_regclass('public."userTokens"') IS NOT NULL AS table_exists`;
-          await db.$queryRaw`SELECT to_regclass('public."jewelryDesignForm"') IS NOT NULL AS table_exists`;
-        } catch (error) {
-          console.error('Error checking table existence:', error);
-          return json({
-            message: "Error checking table existence",
-            error: error.message
-          }, { status: 500 });
-        }
-
-         // Handle CREATE logic here
-         return json({ message: "Design submitted successfully", method: _action });
+          // Check if tables exist
+          const userTokensExists = await checkTableExists('userTokens');
+          const jewelryDesignFormExists = await checkTableExists('jewelryDesignForm');
+  
+          if (!userTokensExists || !jewelryDesignFormExists) {
+            return json({
+              message: "One or more tables do not exist.",
+              userTokensExists,
+              jewelryDesignFormExists
+            }, { status: 500 });
+          }
+  
+          // Handle CREATE logic here
+          return json({ message: "Design submitted successfully", method: _action });
+  
         // Check if the email already exists in the userTokens table
         let userToken;
         try {
