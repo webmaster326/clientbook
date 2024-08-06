@@ -1,3 +1,4 @@
+import { json } from "@remix-run/node";
 import axios from 'axios';
 import qs from 'querystring';
 import { PrismaClient } from "@prisma/client";
@@ -58,7 +59,7 @@ const { clientid, clientsecret } = settings;
   });
 
   return data.access_token;
-} catch (error) {
+} catch (error) { 
   console.error('Error refreshing token:', error);
   throw error;
 }
