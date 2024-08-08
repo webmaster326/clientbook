@@ -19,8 +19,8 @@ export const action = async ({ request }) => {
    const entryId = parseInt(designId, 10);
 
   if (file && file instanceof File) {
-    // Create a path to save the uploaded file
-    const uploadDir = path.join(process.cwd(), 'uploads');
+   // Create a path to save the uploaded file in the mounted Render disk path
+   const uploadDir = path.join('/uploads', 'uploads');
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
