@@ -4,7 +4,7 @@ import { json } from '@remix-run/node';
 
 export const loader = async ({ params }) => {
   const { filename } = params;
-  const filePath = join('/data', 'uploads', filename);
+  const filePath = join('/uploads', 'uploads', filename);
 
   if (!existsSync(filePath)) {
     throw new Response("File not found", { status: 404 });
