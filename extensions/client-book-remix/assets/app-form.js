@@ -54,13 +54,19 @@ document.addEventListener("DOMContentLoaded", function() {
          // Update Dropzone URL with design ID
          myDropzone.options.url = `${location.origin}/apps/proxyformdata/upload?shop=${shopDomain}&api_version=${apiVersion}&designId=${designId}`;
  
-         // Process Dropzone files
-         myDropzone.processQueue();
- 
-         myDropzone.on("queuecomplete", function() {
-           const thanksUrl = `${location.origin}/pages/thank-you/`;
-           window.location.href = thanksUrl;
-         });
+        // Check if there are files in Dropzone
+        if (myDropzone.getAcceptedFiles().length === 0) {
+          // No files to upload, redirect to thank you page
+          window.location.href = `${location.origin}/pages/thank-you/`;
+        } else {
+          // Process Dropzone files
+          myDropzone.processQueue();
+
+          myDropzone.on("queuecomplete", function() {
+            // Redirect to thank you page after all files are processed
+            window.location.href = `${location.origin}/pages/thank-you/`;
+          });
+        }
         }
       })
       .catch(error => console.log(error));
