@@ -5,8 +5,11 @@ import path from 'path';
 import { Readable, pipeline } from 'stream';
 import { promisify } from 'util';
 import { PrismaClient } from "@prisma/client";
+import { v4 as uuidv4 } from 'uuid';
+
 
 const db = new PrismaClient();
+
 const pipelineAsync = promisify(pipeline);
 
 export const action = async ({ request }) => {
@@ -25,7 +28,9 @@ export const action = async ({ request }) => {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
 
-    const filePath = path.join(uploadDir, file.name);
+    const uniqueFilename = `${uuidv4()}-${file.name}`;
+
+    const filePath = path.join(uploadDir, uniqueFilename);
 
     try {
       // Use a stream to handle the file upload
@@ -43,16 +48,16 @@ export const action = async ({ request }) => {
       const newUploadFile = await db.uploadFiles.create({
         data: {
           entryId: entryId, // Linking to JewelryDesignForm entry with id
-          filename: file.name,
+          filename: uniqueFilename,
           refreshToken: 'some-refresh-token'
         }
       });
 
-      console.log('Received file:', file.name);
+      console.log('Received file:',uniqueFilename);
       return json({ 
         success: true, 
         message: 'File uploaded successfully',
-        fileUrl: `/files/${file.name}` // Include file URL in the response
+        fileUrl: `/files/${uniqueFilename}` // Include file URL in the response
       });
     } catch (error) {
       console.error('Error writing file:', error);
