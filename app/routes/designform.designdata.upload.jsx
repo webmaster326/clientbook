@@ -8,6 +8,15 @@ import { PrismaClient } from "@prisma/client";
 import { v4 as uuidv4 } from 'uuid';
 
 
+// Function to sanitize filenames
+const sanitizeFilename = (filename) => {
+  return filename
+    .toLowerCase() // Convert to lowercase
+    .replace(/[^a-z0-9.-]/g, '_') // Replace non-alphanumeric characters with underscores
+    .replace(/_{2,}/g, '_') // Replace multiple underscores with a single underscore
+    .replace(/^-+|-+$/g, ''); // Remove leading and trailing hyphens or underscores
+};
+
 const db = new PrismaClient();
 
 const pipelineAsync = promisify(pipeline);
@@ -28,9 +37,9 @@ export const action = async ({ request }) => {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
 
-    const uniqueFilename = `${uuidv4()}-${file.name}`;
-
-    const filePath = path.join(uploadDir, uniqueFilename);
+   // Sanitize filename
+   const sanitizedFilename = sanitizeFilename(file.name);
+    const filePath = path.join(uploadDir, sanitizedFilename);
 
     try {
       // Use a stream to handle the file upload
@@ -48,16 +57,16 @@ export const action = async ({ request }) => {
       const newUploadFile = await db.uploadFiles.create({
         data: {
           entryId: entryId, // Linking to JewelryDesignForm entry with id
-          filename: uniqueFilename,
+          filename: sanitizedFilename,
           refreshToken: 'some-refresh-token'
         }
       });
 
-      console.log('Received file:',uniqueFilename);
+      console.log('Received file:',sanitizedFilename);
       return json({ 
         success: true, 
         message: 'File uploaded successfully',
-        fileUrl: `/files/${uniqueFilename}` // Include file URL in the response
+        fileUrl: `/files/${sanitizedFilename}` // Include file URL in the response
       });
     } catch (error) {
       console.error('Error writing file:', error);
