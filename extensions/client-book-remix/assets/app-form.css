@@ -79,6 +79,18 @@
  .Polaris-TextField {
    flex: 1 1 100%; /* Flexible width for phone number input */
  }
+
+ /* Custom CSS 8Aug2024 */
+ .jewelry-design-form { padding-bottom: 75px; }
+.Polaris-FormLayout__Item button.btn { margin-top: 30px; }
+#designForm label.Polaris-Label { letter-spacing: 1px; }
+#designForm .Polaris-TextField__Input, 
+#designForm .Polaris-Select__Input {
+	border: 1px solid #d9d9d9;
+	background-color: #f9f9f9;
+}
+.dropzone { background: #f9f9f9; }
+
  
  @media (max-width: 600px) {
    .Polaris-FormLayout__Item--halfWidth {
