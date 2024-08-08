@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Redirect to thank you page after all files are processed
             window.location.href = `${location.origin}/pages/thank-you/`;
           });
-        }
+        } 
         }
       })
       .catch(error => console.log(error));
