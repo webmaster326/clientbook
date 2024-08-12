@@ -19,5 +19,9 @@ module.exports = {
   future: {},
   serverDependenciesToBundle: [
 		/^remix-utils.*/,
+  ],
+  watchPaths: [
+    // Include the extensions folder in the build process
+    path.resolve(__dirname, "extensions")
   ]
 };
