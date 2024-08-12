@@ -114,23 +114,20 @@ document.addEventListener("DOMContentLoaded", function() {
   // Check phone number format based on selected country
   let countryCode = document.getElementById("country_code").value;
   let phoneInput = document.getElementById("phone_number");
-  if (!validatePhoneNumber(phoneInput.value, countryCode)) {
-    showError(phoneInput, "Invalid phone number format for selected country");
+  let phoneValidation = validatePhoneNumber(phoneInput.value, countryCode);
+
+  if (!phoneValidation.isValid) {
+    showError(phoneInput, phoneValidation.message);
     isValid = false;
     if (!firstErrorElement) firstErrorElement = phoneInput;
-
   } else {
     clearError(phoneInput);
   }
 
-  // Scroll to the first error element if there are validation errors
   if (!isValid && firstErrorElement) {
     firstErrorElement.scrollIntoView({ behavior: "smooth", block: "center" });
   }
-      return isValid;
+  return isValid;
     }
-  
-  
-  
   });
   
