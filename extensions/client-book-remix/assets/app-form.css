@@ -91,7 +91,14 @@
 }
 
 .dropzone { background: #f9f9f9; }
-
+ /* Custom CSS 12Aug2024 */
+.jewelry-design-form form#designForm .Polaris-FormLayout__Item textarea { width: calc(100% - 0px) !important; }
+@media screen and (max-width: 767px) {
+	.jewelry-design-form .Polaris-Stack { flex-direction: column; }
+	.jewelry-design-form .Polaris-Stack .Polaris-TextField { width:100% !important; }
+	.jewelry-design-form .Polaris-Stack .Polaris-TextField label { display: none; }
+  .jewelry-design-form .Polaris-Select--smaller {   width: 100%; }	
+}
  
  @media (max-width: 600px) {
    .Polaris-FormLayout__Item--halfWidth {
