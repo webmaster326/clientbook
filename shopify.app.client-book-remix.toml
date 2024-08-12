@@ -3,7 +3,7 @@
 client_id = "8f1806262a189d754ccff2cc1e1c3c58"
 name = "client-book-remix"
 handle = "client-book-remix"
-application_url = "https://remixclientbook.onrender.com"
+application_url = "https://clientbook-dn2h.onrender.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://remixclientbook.onrender.com/auth/callback",
-  "https://remixclientbook.onrender.com/auth/shopify/callback",
-  "https://remixclientbook.onrender.com/api/auth/callback"
+  "https://clientbook-dn2h.onrender.com/auth/callback",
+  "https://clientbook-dn2h.onrender.com/auth/shopify/callback",
+  "https://clientbook-dn2h.onrender.com/api/auth/callback"
 ]
 
 [webhooks]
