@@ -74,17 +74,20 @@ document.addEventListener("DOMContentLoaded", function() {
   
     function validateForm() {
       let isValid = true;
+      let firstErrorElement = null;
+
   
       // Clear previous error messages
       document.querySelectorAll(".error-message").forEach(el => el.remove());
   
       // Check required fields
-      let requiredFields = ["first_name", "last_name", "email_address", "design_options", "metal_options","phone_number", "preferred_price_range", "preferred_contact_method", "availability_option"];
+      let requiredFields = ["first_name", "last_name", "email_address", "design_options", "metal_options","phone_number", "preferred_price_range", "preferred_contact_method", "availability_option","design_notes"];
       requiredFields.forEach(field => {
         let input = document.getElementById(field);
         if (!input.value) {
           showError(input, `${field.replace("_", " ")} is required`);
           isValid = false;
+          if (!firstErrorElement) firstErrorElement = input;
         } else {
           clearError(input);
         }
@@ -95,10 +98,14 @@ document.addEventListener("DOMContentLoaded", function() {
       if (!emailInput.value) {
         showError(emailInput, "Email is required");
         isValid = false;
+        if (!firstErrorElement) firstErrorElement = emailInput;
+
       } 
       if (emailInput.value && !validateEmail(emailInput.value)) {
         showError(emailInput, "Invalid email format");
         isValid = false;
+        if (!firstErrorElement) firstErrorElement = emailInput;
+
       } else {
         clearError(emailInput);
       }
@@ -110,11 +117,16 @@ document.addEventListener("DOMContentLoaded", function() {
   if (!validatePhoneNumber(phoneInput.value, countryCode)) {
     showError(phoneInput, "Invalid phone number format for selected country");
     isValid = false;
+    if (!firstErrorElement) firstErrorElement = phoneInput;
+
   } else {
     clearError(phoneInput);
   }
 
-
+  // Scroll to the first error element if there are validation errors
+  if (!isValid && firstErrorElement) {
+    firstErrorElement.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
       return isValid;
     }
   

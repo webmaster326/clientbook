@@ -72,16 +72,20 @@
  }
  
  .Polaris-Select--smaller {
-   flex: 0 0 auto; /* Non-flexible item for country code */
+   flex: 0 0 40%; /* Non-flexible item for country code */
    width: auto; /* Auto width for select */
  }
- 
+  
  .Polaris-TextField {
    flex: 1 1 100%; /* Flexible width for phone number input */
  }
 
  /* Custom CSS 8Aug2024 */
- .jewelry-design-form { padding-bottom: 75px; }
+ .jewelry-design-form {
+  padding-bottom: 75px;
+  max-width: 1000px;
+  margin: auto;
+}
 .Polaris-FormLayout__Item button.btn { margin-top: 30px; }
 #designForm label.Polaris-Label { letter-spacing: 1px; }
 #designForm .Polaris-TextField__Input, 
@@ -93,6 +97,13 @@
 .dropzone { background: #f9f9f9; }
  /* Custom CSS 12Aug2024 */
 .jewelry-design-form form#designForm .Polaris-FormLayout__Item textarea { width: calc(100% - 0px) !important; }
+
+.jewelry-design-form form {
+  background: #fff;
+  padding: 50px;
+  border-radius: 6px;
+  border: dashed 1px #cdcdcc;
+}
 @media screen and (max-width: 767px) {
 	.jewelry-design-form .Polaris-Stack { flex-direction: column; }
 	.jewelry-design-form .Polaris-Stack .Polaris-TextField { width:100% !important; }
