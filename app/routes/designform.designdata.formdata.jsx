@@ -153,8 +153,8 @@ export async function action({ request }) {
           try {
             const userEmail = 'anjali.dakshadesign@gmail.com'; // replace with the actual email retrieval logic
             const accessToken = await getAccessToken(userEmail);
-            const storeId = 'bbb9c016-49fd-11ef-9b14-12631956fe63';
-            const shop = 'sziro.myshopify.com';
+            const storeId = '3e4aecd9-f297-11ee-8941-0ed6751899ff';
+            const shop = 'sziro-jewelry.myshopify.com';
 
             // Data to be sent to the /webcontact API
             const requestBody = {

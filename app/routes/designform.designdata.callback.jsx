@@ -10,7 +10,7 @@ export const loader = async ({ request }) => {
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
   const shop = url.searchParams.get('shop');
-  const storeId = 'bbb9c016-49fd-11ef-9b14-12631956fe63';
+  const storeId = '3e4aecd9-f297-11ee-8941-0ed6751899ff';
 
   if (!code || !shop) {
     return json({ error: 'Missing code or shop parameter' }, { status: 400 });
