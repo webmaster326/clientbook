@@ -82,7 +82,7 @@ export const loader = async ({ request }) => {
     });
 
   } catch (error) {
-    console.error('Error during token exchange:', error.response ? error.response.data : error.message);
+    console.error(shop +'Error during token exchange:', error.response ? error.response.data : error.message);
     return json({ error: 'Error during token exchange' }, { status: 500 });
   }
 };
