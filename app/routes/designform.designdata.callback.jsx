@@ -16,7 +16,7 @@ export const loader = async ({ request }) => {
     return json({ error: 'Missing code or shop parameter' }, { status: 400 });
   }
 
-  const redirect_uri = `https://szirojewelry.com/apps/proxyformdata/callback`;
+  const redirect_uri = `https://${shop}/apps/proxyformdata/callback`;
 
   try {
     // Fetch settings from the database
@@ -82,7 +82,7 @@ export const loader = async ({ request }) => {
     });
 
   } catch (error) {
-    console.error(shop +'Error during token exchange:', error.response ? error.response.data : error.message);
+    console.error('Error during token exchange:', error.response ? error.response.data : error.message);
     return json({ error: 'Error during token exchange' }, { status: 500 });
   }
 };
