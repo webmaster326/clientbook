@@ -6,53 +6,26 @@ import { cors } from 'remix-utils/cors';
 //import { getAccessToken } from "../utils/tokenManagement.server";
 import axios from 'axios';
 import nodemailer from 'nodemailer';
-import path from 'path';
-import fs from 'fs';
-
-// Prepare HTML template
-const templatePath = path.join(__dirname, 'emailTemplate.html'); // Path to your HTML template file
-const template = fs.readFileSync(templatePath, 'utf8');
-
-// Function to generate email content
-function generateEmailContent(fields) {
-  return template
-    .replace('{{firstName}}', fields.firstName)
-    .replace('{{lastName}}', fields.lastName)
-    .replace('{{emailAddress}}', fields.emailAddress)
-    .replace('{{countryCode}}', fields.countryCode)
-    .replace('{{phoneNumber}}', fields.phoneNumber)
-    .replace('{{designOptions}}', fields.designOptions)
-    .replace('{{metalOptions}}', fields.metalOptions)
-    .replace('{{preferredPriceRange}}', fields.preferredPriceRange)
-    .replace('{{preferredContactMethod}}', fields.preferredContactMethod)
-    .replace('{{availabilityOption}}', fields.availabilityOption)
-    .replace('{{designNotes}}', fields.designNotes)
-    .replace('{{fileUpload}}', fields.fileUpload);
-}
 
 
-// Configure the transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'szirojewelry1@gmail.com',
-    pass: 'rjxm dmtb jstz tnbz',
-  },
-});
-
-
-// Function to send the email
-async function sendEmail(fields) {
-  const mailOptions = {
-    from: '"Sziro" <szirojewelry1@gmail.com>',
-    to: 'anjali.dakshadesign@gmail.com',
-    subject: 'Your Jewelry Design Submission',
-    html: generateEmailContent(fields),
-  };
-
-  await transporter.sendMail(mailOptions);
-}
-
+// Define your HTML template as a string
+const EMAIL_TEMPLATE = `
+  <html>
+    <body>
+      <h1>Jewelry Design Submission</h1>
+      <p>Hi {{firstName}},</p>
+      <p>Thank you for submitting your jewelry design. We will review your submission and get back to you soon.</p>
+      <p><strong>Design Options:</strong> {{designOptions}}</p>
+      <p><strong>Metal Options:</strong> {{metalOptions}}</p>
+      <p><strong>Preferred Price Range:</strong> {{preferredPriceRange}}</p>
+      <p><strong>Preferred Contact Method:</strong> {{preferredContactMethod}}</p>
+      <p><strong>Availability:</strong> {{availabilityOption}}</p>
+      <p><strong>Design Notes:</strong> {{designNotes}}</p>
+      <p>Best regards,</p>
+      <p>Your Company Name</p>
+    </body>
+  </html>
+`;
 
 // get request: accept request with request: customerId, shop, productId.
 // read database and return wishlist items for that customer.
@@ -196,8 +169,34 @@ export async function action({ request }) {
 
           designId = newDesign.id;
 
-          // Handle the "CREATE" action
-      await sendEmail(fields);
+        // Create the email content by replacing placeholders in the template
+        const emailContent = EMAIL_TEMPLATE
+        .replace('{{firstName}}', firstName)
+        .replace('{{designOptions}}', designOptions)
+        .replace('{{metalOptions}}', metalOptions)
+        .replace('{{preferredPriceRange}}', preferredPriceRange)
+        .replace('{{preferredContactMethod}}', preferredContactMethod)
+        .replace('{{availabilityOption}}', availabilityOption)
+        .replace('{{designNotes}}', designNotes);
+
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'szirojewelry1@gmail.com',
+          pass: 'rjxm dmtb jstz tnbz',
+        },
+      });
+
+      const mailOptions = {
+        from: '"Sziro" <szirojewelry1@gmail.com>',
+        to: 'anjali.dakshadesign@gmail.com',
+        subject: 'Your Jewelry Design Submission',
+        html: emailContent,
+      };
+
+      await transporter.sendMail(mailOptions);
+
+
           // Get access token and send data to /webcontact API
         /*  try {
             const userEmail = 'anjali.dakshadesign@gmail.com'; // replace with the actual email retrieval logic
