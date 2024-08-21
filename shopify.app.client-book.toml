@@ -1,9 +1,9 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "da2fbd54191fb3f0face3ffa64c72844"
+client_id = "b0027ef68b7750e7f2643ab65b22542a"
 name = "client-book"
 handle = "client-book"
-application_url = "https://clientbook-dn2h.onrender.com"
+application_url = "https://transport-apartments-cardiovascular-joshua.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://clientbook-dn2h.onrender.com/auth/callback",
-  "https://clientbook-dn2h.onrender.com/auth/shopify/callback",
-  "https://clientbook-dn2h.onrender.com/api/auth/callback"
+  "https://transport-apartments-cardiovascular-joshua.trycloudflare.com/auth/callback",
+  "https://transport-apartments-cardiovascular-joshua.trycloudflare.com/auth/shopify/callback",
+  "https://transport-apartments-cardiovascular-joshua.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
