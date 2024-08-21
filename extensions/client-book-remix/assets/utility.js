@@ -7,6 +7,7 @@ function showError(input, message) {
     input.parentNode.appendChild(error);
   }
   
+  
   function clearError(input) {
     let error = input.parentNode.querySelector(".error-message");
     if (error) {
