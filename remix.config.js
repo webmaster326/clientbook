@@ -23,5 +23,6 @@ module.exports = {
   watchPaths: [
     // Include the extensions folder in the build process
     path.resolve(__dirname, "extensions")
-  ]
+  ],
+  assetsInclude: ["**/*.html"],  // Include .html files as assets
 };
