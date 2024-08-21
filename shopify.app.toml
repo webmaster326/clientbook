@@ -1,6 +1,6 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "f7dd466ba0c7193f644ebe98c91bda57"
+client_id = "c8f8caf6f85fa774df446c6172d02b5a"
 name = "client-book"
 handle = "client-book"
 application_url = "https://positions-container-brisbane-creatures.trycloudflare.com"
