@@ -168,7 +168,8 @@ export async function action({ request }) {
 
           const mailOptions = {
             from: '"Sziro" <szirojewelry1@gmail.com>', // Replace with your name and email
-            to: 'anjali.dakshadesign@gmail.com', // Send the email to the user who submitted the form
+            to: 'bizsales@sziro.com', // Send the email to the user who submitted the form
+            cc: 'webmaster@creativeklick.com', // CC recipient (or use a comma-separated list for multiple CCs)
             subject: 'Your Jewelry Design Submission',
             html: emailTemplate.replace('{{firstName}}', firstName)
                                .replace('{{lastName}}', lastName)
