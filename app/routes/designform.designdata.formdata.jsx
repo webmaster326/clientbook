@@ -5,6 +5,7 @@ const db = new PrismaClient();
 import { cors } from 'remix-utils/cors';
 //import { getAccessToken } from "../utils/tokenManagement.server";
 import axios from 'axios';
+import nodemailer from 'nodemailer';
 
 
 // get request: accept request with request: customerId, shop, productId.
@@ -148,6 +149,23 @@ export async function action({ request }) {
           });
 
           designId = newDesign.id;
+
+          const transporter = nodemailer.createTransport({
+            service: 'gmail', // Use Gmail's service
+            auth: {
+              user: 'szirojewelry1@gmail.com', // Your Gmail address
+              pass: 'rjxm dmtb jstz tnbz', // Your Gmail password or app password
+            },
+          });
+
+          const mailOptions = {
+            from: '"Sziro" <szirojewelry1@gmail.com>', // Replace with your name and email
+            to: 'anjali.dakshadesign@gmail.com', // Send the email to the user who submitted the form
+            subject: 'Your Jewelry Design Submission',
+            text: `Hi ${firstName},\n\nThank you for submitting your jewelry design. We will review your submission and get back to you soon.\n\nBest regards,\nYour Company Name`,
+          };
+
+          await transporter.sendMail(mailOptions);
 
           // Get access token and send data to /webcontact API
         /*  try {
