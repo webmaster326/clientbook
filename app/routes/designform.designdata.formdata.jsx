@@ -154,7 +154,7 @@ export async function action({ request }) {
           designId = newDesign.id;
 
 
-          const templatePath = __dirname + '/emailtemplate.html';
+          const templatePath = __dirname + '../public/emailTemplate.html';
           const fs = await import('fs').then(module => module.promises);
           const emailTemplate = await fs.readFile(templatePath, 'utf8');
 
