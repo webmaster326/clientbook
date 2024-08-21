@@ -1,9 +1,9 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "8f1806262a189d754ccff2cc1e1c3c58"
-name = "client-book-remix"
-handle = "client-book-remix"
-application_url = "https://earrings-poison-xbox-sometimes.trycloudflare.com"
+client_id = "102a3003a56a36bf0c2bfec2da251023"
+name = "react-app"
+handle = "react-app-121"
+application_url = "https://allows-enhancing-india-merry.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://earrings-poison-xbox-sometimes.trycloudflare.com/auth/callback",
-  "https://earrings-poison-xbox-sometimes.trycloudflare.com/auth/shopify/callback",
-  "https://earrings-poison-xbox-sometimes.trycloudflare.com/api/auth/callback"
+  "https://allows-enhancing-india-merry.trycloudflare.com/auth/callback",
+  "https://allows-enhancing-india-merry.trycloudflare.com/auth/shopify/callback",
+  "https://allows-enhancing-india-merry.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
