@@ -9,21 +9,7 @@ import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
 
-// Define the path to your email template
-const TEMPLATE_PATH = path.resolve(__dirname, '../public/emailTemplate.html');
-
-// Function to read the HTML template
-async function readHtmlTemplate() {
-  return new Promise((resolve, reject) => {
-    fs.readFile(TEMPLATE_PATH, 'utf8', (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-}
+import { __dirname } from '../utils/getDirName.js'; // Import the __dirname utility
 
 // get request: accept request with request: customerId, shop, productId.
 // read database and return wishlist items for that customer.
@@ -167,40 +153,40 @@ export async function action({ request }) {
 
           designId = newDesign.id;
 
-         // Read the email template
-         const emailTemplate = await readHtmlTemplate();
-         // Replace placeholders in the HTML template
-         const emailContent = emailTemplate
-           .replace('{{firstName}}', firstName)
-           .replace('{{lastName}}', lastName)
-           .replace('{{designOptions}}', designOptions)
-           .replace('{{metalOptions}}', metalOptions)
-           .replace('{{preferredPriceRange}}', preferredPriceRange)
-           .replace('{{preferredContactMethod}}', preferredContactMethod)
-           .replace('{{availabilityOption}}', availabilityOption)
-           .replace('{{designNotes}}', designNotes);
-           // Replace other placeholders if needed
- 
-         // Setup email transporter
-         const transporter = nodemailer.createTransport({
-           service: 'gmail',
-           auth: {
-             user: 'your-email@gmail.com',
-             pass: 'your-password',
-           },
-         });
- 
-         // Email options
-         const mailOptions = {
-           from: '"Your Company" <your-email@gmail.com>',
-           to: emailAddress, // Send email to the customer
-           subject: 'Your Jewelry Design Submission',
-           html: emailContent, // Use the HTML content
-         };
- 
-         // Send the email
-         await transporter.sendMail(mailOptions);
- 
+
+          const templatePath = __dirname + '/emailtemplate.html';
+          const fs = await import('fs').then(module => module.promises);
+          const emailTemplate = await fs.readFile(templatePath, 'utf8');
+
+          const transporter = nodemailer.createTransport({
+            service: 'gmail', // Use Gmail's service
+            auth: {
+              user: 'szirojewelry1@gmail.com', // Your Gmail address
+              pass: 'rjxm dmtb jstz tnbz', // Your Gmail password or app password
+            },
+          });
+
+          const mailOptions = {
+            from: '"Sziro" <szirojewelry1@gmail.com>', // Replace with your name and email
+            to: 'anjali.dakshadesign@gmail.com', // Send the email to the user who submitted the form
+            subject: 'Your Jewelry Design Submission',
+            html: emailTemplate.replace('{{firstName}}', firstName)
+                               .replace('{{lastName}}', lastName)
+                               .replace('{{emailAddress}}', emailAddress)
+                               .replace('{{countryCode}}', countryCode)
+                               .replace('{{phoneNumber}}', phoneNumber)
+                               .replace('{{designOptions}}', designOptions)
+                               .replace('{{metalOptions}}', metalOptions)
+                               .replace('{{preferredPriceRange}}', preferredPriceRange)
+                               .replace('{{preferredContactMethod}}', preferredContactMethod)
+                               .replace('{{availabilityOption}}', availabilityOption)
+                               .replace('{{designNotes}}', designNotes),
+          };
+
+          await transporter.sendMail(mailOptions);
+
+
+      
 
           // Get access token and send data to /webcontact API
         /*  try {
