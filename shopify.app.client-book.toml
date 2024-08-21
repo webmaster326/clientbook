@@ -1,6 +1,6 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-client_id = "c8f8caf6f85fa774df446c6172d02b5a"
+client_id = "da2fbd54191fb3f0face3ffa64c72844"
 name = "client-book"
 handle = "client-book"
 application_url = "https://clientbook-dn2h.onrender.com"
