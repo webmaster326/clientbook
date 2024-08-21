@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { PrismaClient } from "@prisma/client";
 const db = new PrismaClient();
 import { cors } from 'remix-utils/cors';
-import { getAccessToken } from "../utils/tokenManagement.server";
+//import { getAccessToken } from "../utils/tokenManagement.server";
 import axios from 'axios';
 
 
