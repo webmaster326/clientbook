@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const shopDomain = Shopify.shop;
 
 
+  
     // Initialize Dropzone
     Dropzone.autoDiscover = false;
     const designIdInput = document.getElementById('designId');
