@@ -6,6 +6,52 @@ import { cors } from 'remix-utils/cors';
 //import { getAccessToken } from "../utils/tokenManagement.server";
 import axios from 'axios';
 import nodemailer from 'nodemailer';
+import path from 'path';
+import fs from 'fs';
+
+// Prepare HTML template
+const templatePath = path.join(__dirname, 'emailTemplate.html'); // Path to your HTML template file
+const template = fs.readFileSync(templatePath, 'utf8');
+
+// Function to generate email content
+function generateEmailContent(fields) {
+  return template
+    .replace('{{firstName}}', fields.firstName)
+    .replace('{{lastName}}', fields.lastName)
+    .replace('{{emailAddress}}', fields.emailAddress)
+    .replace('{{countryCode}}', fields.countryCode)
+    .replace('{{phoneNumber}}', fields.phoneNumber)
+    .replace('{{designOptions}}', fields.designOptions)
+    .replace('{{metalOptions}}', fields.metalOptions)
+    .replace('{{preferredPriceRange}}', fields.preferredPriceRange)
+    .replace('{{preferredContactMethod}}', fields.preferredContactMethod)
+    .replace('{{availabilityOption}}', fields.availabilityOption)
+    .replace('{{designNotes}}', fields.designNotes)
+    .replace('{{fileUpload}}', fields.fileUpload);
+}
+
+
+// Configure the transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'szirojewelry1@gmail.com',
+    pass: 'rjxm dmtb jstz tnbz',
+  },
+});
+
+
+// Function to send the email
+async function sendEmail(fields) {
+  const mailOptions = {
+    from: '"Sziro" <szirojewelry1@gmail.com>',
+    to: 'anjali.dakshadesign@gmail.com',
+    subject: 'Your Jewelry Design Submission',
+    html: generateEmailContent(fields),
+  };
+
+  await transporter.sendMail(mailOptions);
+}
 
 
 // get request: accept request with request: customerId, shop, productId.
@@ -150,23 +196,8 @@ export async function action({ request }) {
 
           designId = newDesign.id;
 
-          const transporter = nodemailer.createTransport({
-            service: 'gmail', // Use Gmail's service
-            auth: {
-              user: 'szirojewelry1@gmail.com', // Your Gmail address
-              pass: 'rjxm dmtb jstz tnbz', // Your Gmail password or app password
-            },
-          });
-
-          const mailOptions = {
-            from: '"Sziro" <szirojewelry1@gmail.com>', // Replace with your name and email
-            to: 'anjali.dakshadesign@gmail.com', // Send the email to the user who submitted the form
-            subject: 'Your Jewelry Design Submission',
-            text: `Hi ${firstName},\n\nThank you for submitting your jewelry design. We will review your submission and get back to you soon.\n\nBest regards,\nYour Company Name`,
-          };
-
-          await transporter.sendMail(mailOptions);
-
+          // Handle the "CREATE" action
+      await sendEmail(fields);
           // Get access token and send data to /webcontact API
         /*  try {
             const userEmail = 'anjali.dakshadesign@gmail.com'; // replace with the actual email retrieval logic

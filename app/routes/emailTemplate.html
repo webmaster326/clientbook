@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jewelry Design Submission</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .header {
+      text-align: center;
+      padding-bottom: 20px;
+    }
+    .header img {
+      max-width: 200px;
+    }
+    .content {
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+    }
+    .footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.8em;
+      color: #777;
+    }
+    .field {
+      margin-bottom: 10px;
+    }
+    .field label {
+      font-weight: bold;
+    }
+    .field p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://yourdomain.com/path-to-your-logo.png" alt="Your Company Logo">
+    </div>
+    <div class="content">
+      <p>Hi {{firstName}},</p>
+      <p>Thank you for submitting your jewelry design. Here are the details of your submission:</p>
+      <div class="field">
+        <label>First Name:</label>
+        <p>{{firstName}}</p>
+      </div>
+      <div class="field">
+        <label>Last Name:</label>
+        <p>{{lastName}}</p>
+      </div>
+      <div class="field">
+        <label>Email Address:</label>
+        <p>{{emailAddress}}</p>
+      </div>
+      <div class="field">
+        <label>Country Code:</label>
+        <p>{{countryCode}}</p>
+      </div>
+      <div class="field">
+        <label>Phone Number:</label>
+        <p>{{phoneNumber}}</p>
+      </div>
+      <div class="field">
+        <label>Design Options:</label>
+        <p>{{designOptions}}</p>
+      </div>
+      <div class="field">
+        <label>Metal Options:</label>
+        <p>{{metalOptions}}</p>
+      </div>
+      <div class="field">
+        <label>Preferred Price Range:</label>
+        <p>{{preferredPriceRange}}</p>
+      </div>
+      <div class="field">
+        <label>Preferred Contact Method:</label>
+        <p>{{preferredContactMethod}}</p>
+      </div>
+      <div class="field">
+        <label>Availability Option:</label>
+        <p>{{availabilityOption}}</p>
+      </div>
+      <div class="field">
+        <label>Design Notes:</label>
+        <p>{{designNotes}}</p>
+      </div>
+      <div class="field">
+        <label>File Upload:</label>
+        <p>{{fileUpload}}</p>
+      </div>
+      <p>We will review your submission and get back to you soon.</p>
+      <p>Best regards,</p>
+      <p>Your Company Name</p>
+    </div>
+    <div class="footer">
+      <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
