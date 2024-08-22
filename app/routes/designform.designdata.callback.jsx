@@ -31,7 +31,7 @@ export const loader = async ({ request }) => {
     const { clientid, clientsecret } = settings;
 
     // Exchange authorization code for access token
-    const tokenResponse = await axios.post('https://auth-dev.clbk.app/token', qs.stringify({
+    const tokenResponse = await axios.post('https://auth.clbk.app/token', qs.stringify({
       grant_type: 'authorization_code',
       code,
       redirect_uri,
@@ -56,7 +56,7 @@ export const loader = async ({ request }) => {
     };
 
     // Call the /webcontact API with the access token and request body
-    const webContactResponse = await axios.post('https://posapi-dev.clbk.app/api/v1/webcontact', requestBody, {
+    const webContactResponse = await axios.post('https://posapi.clbk.app/api/v1/webcontact', requestBody, {
       headers: {
         'Authorization': `Bearer ${access_token}`,
         'Content-Type': 'application/json'
