@@ -32,7 +32,7 @@ export const loader = async ({ request }) => {
 
     
     // Exchange authorization code for access token
-    const tokenResponse = await axios.post('https://auth.clbk.app/token', qs.stringify({
+    const tokenResponse = await axios.post('https://auth.clbk.app/oauth2/token', qs.stringify({
       grant_type: 'authorization_code',
       code,
       redirect_uri,
