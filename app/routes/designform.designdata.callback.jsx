@@ -16,7 +16,7 @@ export const loader = async ({ request }) => {
     return json({ error: 'Missing code or shop parameter' }, { status: 400 });
   }
 
-  const redirect_uri = `https://szirojewelry.com/apps/proxyformdata/callback`;
+  const redirect_uri = `https://www.szirojewelry.com/apps/proxyformdata/callback/`;
 
   try {
     // Fetch settings from the database
