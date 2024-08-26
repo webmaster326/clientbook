@@ -30,17 +30,7 @@ export const loader = async ({ request }) => {
 
     const { clientid, clientsecret } = settings;
 
-
-       // Return the response data
-       return json({
-        clientid: clientid,
-        clientsecret: clientsecret,
-        redirect_uri:redirect_uri,
-        code:code
-      });
-
-      
-
+    
     // Exchange authorization code for access token
     const tokenResponse = await axios.post('https://auth.clbk.app/token', qs.stringify({
       grant_type: 'authorization_code',
