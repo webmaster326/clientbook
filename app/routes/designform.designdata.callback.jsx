@@ -46,12 +46,7 @@ export const loader = async ({ request }) => {
 
     const { access_token, refresh_token, expires_in } = tokenResponse.data;
 
-     // Return the response data
-     return json({
-      accessToken: access_token,
-      refreshToken: refresh_token
-    });
-
+   
 
     // Data to be sent to the /webcontact API
     const requestBody = {
