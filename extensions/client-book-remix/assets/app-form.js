@@ -57,8 +57,25 @@ document.addEventListener("DOMContentLoaded", function() {
  
         // Check if there are files in Dropzone
         if (myDropzone.getAcceptedFiles().length === 0) {
-          // No files to upload, redirect to thank you page
+         // Send email after all files are processed
+         fetch(`${location.origin}/apps/proxyformdata/sendemail?shop=${shopDomain}&api_version=${apiVersion}&designId=${designId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ designId }) // Pass designId to server to identify the submission
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Email sent successfully:', data);
+          // Redirect to thank you page after sending email
           window.location.href = `${location.origin}/pages/thank-you/`;
+        })
+        .catch(error => {
+          console.error('Error sending email:', error);
+          // Redirect to thank you page in case of email failure
+          window.location.href = `${location.origin}/pages/thank-you/`;
+        });
         } else {
           // Process Dropzone files
           myDropzone.processQueue();
