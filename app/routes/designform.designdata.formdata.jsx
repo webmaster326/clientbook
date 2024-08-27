@@ -90,7 +90,7 @@ export async function action({ request }) {
       case "CREATE":
         
         // Check if the email already exists in the userTokens table
-       /* let userToken;
+        let userToken;
         try {
 
           userToken = await db.userTokens.findUnique({
@@ -128,7 +128,7 @@ export async function action({ request }) {
             message: "Error handling user token",
             error: userTokenError.message
           }, { status: 500 });
-        }*/
+        }
 
         // Insert new data into the JewelryDesignForm table
         let designId;
@@ -207,7 +207,7 @@ export async function action({ request }) {
             };
 
             // Call the /webcontact API with the access token and request body
-            const webContactResponse = await axios.post('https://posapi-dev.clbk.app/api/v1/webcontact', requestBody, {
+            const webContactResponse = await axios.post('https://posapi.clbk.app/api/v1/webcontact', requestBody, {
               headers: {
                 'Authorization': `Bearer ${accessToken}`,
                 'Content-Type': 'application/json'

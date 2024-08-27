@@ -20,7 +20,7 @@ const { clientid, clientsecret } = settings;
 
 
      // Exchange authorization code for access token
-     const response = await axios.post('https://auth-dev.clbk.app/token', qs.stringify({
+     const response = await axios.post('https://auth.clbk.app/token', qs.stringify({
       grant_type: 'refresh_token',
       refresh_token : user.refreshToken,
       client_id: clientid,
