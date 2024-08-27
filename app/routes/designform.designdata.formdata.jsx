@@ -190,7 +190,7 @@ export async function action({ request }) {
       
 
           // Get access token and send data to /webcontact API
-        /*  try {
+          try {
             const userEmail = 'anjali.dakshadesign@gmail.com'; // replace with the actual email retrieval logic
             const accessToken = await getAccessToken(userEmail);
             const storeId = '3e4aecd9-f297-11ee-8941-0ed6751899ff';
@@ -222,7 +222,7 @@ export async function action({ request }) {
               message: "Error contacting the external service",
               error: webContactError.message
             }, { status: 500 });
-          }*/
+          }
 
           response = json({
             message: "Design submitted successfully",
