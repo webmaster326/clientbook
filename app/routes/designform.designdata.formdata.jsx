@@ -9,7 +9,6 @@ import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
 
-import { __dirname } from '../utils/getDirName.js'; // Import the __dirname utility
 
 // get request: accept request with request: customerId, shop, productId.
 // read database and return wishlist items for that customer.
