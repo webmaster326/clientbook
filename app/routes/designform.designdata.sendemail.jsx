@@ -60,7 +60,7 @@ export const action = async ({ request }) => {
       <p><strong>Preferred Contact Method:</strong> ${preferredContactMethod}</p>
       <p><strong>Availability Option:</strong> ${availabilityOption}</p>
       <p><strong>Design Notes:</strong> ${designNotes}</p>
-      ${imageUrls.length > 0 ? imageUrls.map(url => `<p><img src="${url}" alt="Design Image" style="max-width: 100%; height: auto;" /></p>`).join('') : '<p>No images available</p>'}
+      ${imageUrls.length > 0 ? imageUrls.map(url => `<p><img src="${url}" alt="Design Image" style="max-width: 100px; height: 100px;" /></p>`).join('') : '<p>No images available</p>'}
 
     `,
   };
