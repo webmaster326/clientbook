@@ -154,39 +154,6 @@ export async function action({ request }) {
           designId = newDesign.id;
 
 
-          const templatePath = path.resolve(__dirname, '../../public/emailTemplate.html');
-          const fs = await import('fs').then(module => module.promises);
-          const emailTemplate = await fs.readFile(templatePath, 'utf8');
-
-          const transporter = nodemailer.createTransport({
-            service: 'gmail', // Use Gmail's service
-            auth: {
-              user: 'szirojewelry1@gmail.com', // Your Gmail address
-              pass: 'rjxm dmtb jstz tnbz', // Your Gmail password or app password
-            },
-          });
-
-          const mailOptions = {
-            from: '"Sziro" <szirojewelry1@gmail.com>', // Replace with your name and email
-            to: 'bizsales@sziro.com', // Send the email to the user who submitted the form
-            cc: 'webmaster@creativeklick.com', // CC recipient (or use a comma-separated list for multiple CCs)
-            subject: 'Your Jewelry Design Submission',
-            html: emailTemplate.replace('{{firstName}}', firstName)
-                               .replace('{{lastName}}', lastName)
-                               .replace('{{emailAddress}}', emailAddress)
-                               .replace('{{countryCode}}', countryCode)
-                               .replace('{{phoneNumber}}', phoneNumber)
-                               .replace('{{designOptions}}', designOptions)
-                               .replace('{{metalOptions}}', metalOptions)
-                               .replace('{{preferredPriceRange}}', preferredPriceRange)
-                               .replace('{{preferredContactMethod}}', preferredContactMethod)
-                               .replace('{{availabilityOption}}', availabilityOption)
-                               .replace('{{designNotes}}', designNotes),
-          };
-
-          await transporter.sendMail(mailOptions);
-
-
       
 
           // Get access token and send data to /webcontact API
