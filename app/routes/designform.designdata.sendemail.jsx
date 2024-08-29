@@ -52,7 +52,7 @@ export const action = async ({ request }) => {
       clientName: firstName,
       mobile: phoneNumber,
       email: emailAddress,
-      msg: modifiedDesignNotes,
+      msg: designNotes,
       url: `https://${shop}/pages/custom-jewelry-design`
     };
 
