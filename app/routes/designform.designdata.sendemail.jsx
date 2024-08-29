@@ -37,7 +37,7 @@ export const action = async ({ request }) => {
   } = formData;
 
   // Modify designNotes to include the image URLs
-  const modifiedDesignNotes = `${designNotes}\n\nImages:\n${imageUrls.join('\n')}`;
+  const modifiedDesignNotes = `${designNotes}\n${imageUrls.join('\n')}`;
 
   // Get access token and send data to /webcontact API
   try {
