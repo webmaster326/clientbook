@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { PrismaClient } from "@prisma/client";
 const db = new PrismaClient();
 import { cors } from 'remix-utils/cors';
-import { getAccessToken } from "../utils/tokenManagement.server";
+
 import axios from 'axios';
 import nodemailer from 'nodemailer';
 import fs from 'fs';
@@ -131,7 +131,7 @@ export async function action({ request }) {
 
         // Insert new data into the JewelryDesignForm table
         let designId;
-        let webContactData;
+      
         try {
           const newDesign = await db.jewelryDesignForm.create({
             data: {
@@ -155,46 +155,13 @@ export async function action({ request }) {
 
       
 
-          // Get access token and send data to /webcontact API
-          try {
-            const userEmail = 'anjali.dakshadesign@gmail.com'; // replace with the actual email retrieval logic
-            const accessToken = await getAccessToken(userEmail);
-            const storeId = '3e4aecd9-f297-11ee-8941-0ed6751899ff';
-            const shop = 'sziro-jewelry.myshopify.com';
-
-            // Data to be sent to the /webcontact API
-            const requestBody = {
-              storeId, // Using UUID as the storeId
-              clientName: firstName,
-              mobile: phoneNumber,
-              email: emailAddress,
-              msg: designNotes,
-              url: `https://${shop}/pages/custom-jewelry-design`
-            };
-
-            // Call the /webcontact API with the access token and request body
-            const webContactResponse = await axios.post('https://posapi.clbk.app/api/v1/webcontact', requestBody, {
-              headers: {
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'application/json'
-              }
-            });
-
-            webContactData = webContactResponse.data;
-
-          } catch (webContactError) {
-            console.error('Error with /webcontact API:', webContactError);
-            return json({
-              message: "Error contacting the external service",
-              error: webContactError.message
-            }, { status: 500 });
-          }
+         
 
           response = json({
             message: "Design submitted successfully",
             method: _action,
             designId: designId, // Return the design ID
-            webContactData // Return the /webcontact API response
+    
           });
 
         } catch (designError) {
